@@ -20,6 +20,10 @@ type geo struct {
 	Longitude float64 `json:"longitude"`
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func initdb() {
 	var err error
 	db, err = geoip2.Open("GeoLite2-City.mmdb")
@@ -57,7 +61,9 @@ func main() {
 	if len(os.Args) != 1 {
 		logger.Panic("usage: go run geoip")
 	}
+	initdb()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		enableCors(&w)
 		ips, ok := r.URL.Query()["ip"]
 
 		if !ok || len(ips[0]) < 1 {
