@@ -3,8 +3,6 @@ services:
   geo:
     build: .
     image: geoip:latest
-    ports:
-      - "1234:1234"
   web:
     image: apache
     build: ./webapp
