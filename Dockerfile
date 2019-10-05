@@ -3,6 +3,7 @@ FROM golang:1.10.4 AS builder
 WORKDIR /go/src/github.com/ynadji/geoip
 ADD . .
 
+RUN go get github.com/oschwald/geoip2-golang
 RUN go build -o /out/geoip
 
 WORKDIR /out
