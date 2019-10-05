@@ -20,10 +20,6 @@ type geo struct {
 	Longitude float64 `json:"longitude"`
 }
 
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-}
-
 func initdb() {
 	var err error
 	db, err = geoip2.Open("GeoLite2-City.mmdb")
@@ -63,7 +59,6 @@ func main() {
 	}
 	initdb()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		enableCors(&w)
 		ips, ok := r.URL.Query()["ip"]
 
 		if !ok || len(ips[0]) < 1 {
@@ -79,7 +74,7 @@ func main() {
 		}
 		byteResp, err := json.Marshal(geo)
 		if err != nil {
-			panic("Failed to marshall tree")
+			logger.Panic("Failed to marshall geo")
 		}
 		fmt.Fprintf(w, string(byteResp))
 	})
