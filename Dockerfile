@@ -1,4 +1,4 @@
-FROM golang:1.10.4 AS builder
+FROM golang:1.13.1 AS builder
 
 WORKDIR /go/src/github.com/ynadji/geoip
 ADD . .
