@@ -41,8 +41,8 @@ $ curl "http://192.168.99.100?ip=$(dig +short sif.nadji.us)"
 ## Testing
 
 Tests are automatically run at build time using Go's built-in testing
-functionality. See (geoip_test.go)[geoip_test.go] for details. Tests can be run
-independently with:
+functionality. See `geoip_test.go` for details. Tests can be run independently
+with:
 
 ```
 $ go get github.com/ynadji/geoip
