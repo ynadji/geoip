@@ -1,0 +1,14 @@
+version: '3'
+services:
+  geo:
+    build: .
+    image: geoip:latest
+    ports:
+      - "1234:1234"
+  web:
+    image: apache
+    build: ./webapp
+    depends_on:
+      - geo
+    ports:
+      - "80:80"
